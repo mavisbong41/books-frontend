@@ -12,16 +12,21 @@ function logout() {
 <template>
   <header>
     <nav>
-      <RouterLink to="/">Books</RouterLink>
-      <span v-if="auth.isAuthenticated">
-        <RouterLink to="/profile">Profile</RouterLink>
-        <span> | {{ auth.user?.name }} ({{ auth.user?.role }})</span>
-        <button @click="logout">Logout</button>
-      </span>
-      <span v-else>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/register">Register</RouterLink>
-      </span>
+      <RouterLink to="/" class="brand">
+        <span>📚</span> Books API
+      </RouterLink>
+      <div class="right">
+        <RouterLink to="/">Books</RouterLink>
+        <span v-if="auth.isAuthenticated">
+          <RouterLink to="/profile">Profile</RouterLink>
+          <button class="secondary" @click="logout" style="margin-left: 12px;">Logout</button>
+        </span>
+        <span v-else>
+          <RouterLink to="/login">Login</RouterLink>
+          <RouterLink to="/register">Register</RouterLink>
+        </span>
+        <span class="badge">Chapter 13 • Mobile</span>
+      </div>
     </nav>
   </header>
 

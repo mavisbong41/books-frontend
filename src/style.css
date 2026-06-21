@@ -1,0 +1,280 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f1f4f8;
+  color: #1f2937;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+a {
+  color: #0f4c75;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Navbar ---------- */
+header {
+  background: #0f4c75;
+  color: #fff;
+  padding: 14px 24px;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+header nav a {
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  margin-right: 18px;
+}
+
+header nav a.router-link-exact-active {
+  text-decoration: underline;
+}
+
+header .brand {
+  font-size: 19px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header .right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+header .badge {
+  background: #f5a623;
+  color: #4a2d00;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+/* ---------- Layout ---------- */
+main {
+  max-width: 720px;
+  margin: 32px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(15, 76, 117, 0.08);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+}
+
+/* ---------- Forms ---------- */
+label {
+  display: block;
+  font-size: 13px;
+  color: #5b6472;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #d8dee6;
+  border-radius: 8px;
+  background: #fff;
+  color: #1f2937;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0f4c75;
+  box-shadow: 0 0 0 3px rgba(15, 76, 117, 0.12);
+}
+
+button {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #0f4c75;
+  color: #fff;
+  transition: opacity 0.15s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:disabled {
+  background: #9fb6c8;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: #eef2f6;
+  color: #1f2937;
+}
+
+button.danger {
+  background: #c0392b;
+}
+
+/* ---------- Field groups ---------- */
+.field {
+  margin-bottom: 14px;
+}
+
+.field-error {
+  color: #c0392b;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+.row > .field {
+  flex: 1;
+}
+
+/* ---------- Alerts ---------- */
+.alert {
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  margin: 14px 0;
+  border-left: 4px solid;
+}
+
+.alert.info {
+  background: #fff7e0;
+  border-color: #f5a623;
+  color: #8a5a00;
+}
+
+.alert.error {
+  background: #fdecea;
+  border-color: #c0392b;
+  color: #8e2317;
+}
+
+.alert.success {
+  background: #e9f7ef;
+  border-color: #1d9e75;
+  color: #0f6e56;
+}
+
+/* ---------- Book list ---------- */
+.book-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.book-item:last-child {
+  border-bottom: none;
+}
+
+.book-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.book-meta {
+  font-size: 13px;
+  color: #5b6472;
+  margin-top: 2px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  margin-left: 6px;
+}
+
+.tag.yours {
+  background: #e6f1fb;
+  color: #185fa5;
+}
+
+.tag.admin {
+  background: #fdecea;
+  color: #a32d2d;
+}
+
+.tag.member {
+  background: #e9f7ef;
+  color: #0f6e56;
+}
+
+.book-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.book-actions button {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.search-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.search-row input {
+  flex: 1;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.muted {
+  color: #8a93a0;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
