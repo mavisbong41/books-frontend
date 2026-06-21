@@ -1,3 +1,102 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import api from '../api/client';
+import { useAuth } from '../stores/auth';
+
+const auth = useAuth();
+
+const books = ref([]);
+const q = ref('');
+const error = ref('');
+const ok = ref('');
+const editing = ref(null); // null | 'new' | bookObj
+const fieldErrors = ref({});
+const loading = ref(false);
+
+const newBook = ref({ title: '', author: '', year: new Date().getFullYear(), genre: '' });
+
+function canEdit(book) {
+  if (!auth.isAuthenticated) return false;
+  return auth.isAdmin || auth.user?.id === book.created_by;
+}
+
+async function load() {
+  error.value = ''; ok.value = '';
+  loading.value = true;
+  try {
+    const { data } = await api.get('/api/books', { params: { q: q.value || undefined } });
+    books.value = data.data;
+  } catch (e) {
+    error.value = e.response?.data?.error || e.message;
+  } finally {
+    loading.value = false;
+  }
+}
+
+function startNew() {
+  editing.value = 'new';
+  newBook.value = { title: '', author: '', year: new Date().getFullYear(), genre: '' };
+  fieldErrors.value = {};
+}
+
+function startEdit(book) {
+  editing.value = { ...book };
+  fieldErrors.value = {};
+}
+
+function cancelEdit() {
+  editing.value = null;
+  fieldErrors.value = {};
+}
+
+async function save() {
+  error.value = ''; ok.value = ''; fieldErrors.value = {};
+  const isNew = editing.value === 'new';
+  const payload = isNew ? newBook.value : editing.value;
+
+  try {
+    if (isNew) {
+      await api.post('/api/books', payload);
+      ok.value = 'Book created.';
+    } else {
+      await api.put(`/api/books/${payload.id}`, payload);
+      ok.value = 'Book updated.';
+    }
+    editing.value = null;
+    await load();
+  } catch (e) {
+    const d = e.response?.data;
+    if (e.response?.status === 400 && d?.errors) {
+      fieldErrors.value = d.errors;
+    } else if (e.response?.status === 403) {
+      error.value = "You don't own that book — only the creator or an admin can edit it.";
+    } else if (e.response?.status === 401) {
+      error.value = 'Please sign in first.';
+    } else {
+      error.value = d?.error || e.message;
+    }
+  }
+}
+
+async function remove(book) {
+  if (!confirm(`Delete "${book.title}"?`)) return;
+  error.value = ''; ok.value = '';
+  try {
+    await api.delete(`/api/books/${book.id}`);
+    ok.value = `Deleted "${book.title}".`;
+    await load();
+  } catch (e) {
+    if (e.response?.status === 403) {
+      error.value = 'Only admins can delete books.';
+    } else {
+      error.value = e.response?.data?.error || e.message;
+    }
+  }
+}
+
+onMounted(load);
+</script>
+
 <template>
   <div class="card">
     <div class="search-row">
