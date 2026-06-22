@@ -1,11 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useAuth } from './stores/auth';
 
 const auth = useAuth();
+const router = useRouter();
 
 function logout() {
   auth.logout();
+  router.push('/');
 }
 
 function initials(name) {
@@ -16,13 +19,14 @@ function initials(name) {
 
 <template>
   <header>
-    <nav>
+    <div class="navbar-top">
       <RouterLink to="/" class="brand">
-      <span class="logo-badge">📚</span>
-      UTM Books
+        <span class="logo-badge">📚</span>
+        UTM Books
       </RouterLink>
-
-      <div class="right">
+    </div>
+    <div class="navbar-bottom">
+      <div class="right-left">
         <template v-if="auth.isAuthenticated">
           <div class="user-pill">
             <span class="avatar">{{ initials(auth.user?.name) }}</span>
@@ -30,15 +34,17 @@ function initials(name) {
             <span class="role-tag" :class="auth.user?.role">{{ auth.user?.role }}</span>
           </div>
           <RouterLink to="/profile">Profile</RouterLink>
-          <button class="logout-btn" @click="logout">Logout</button>
         </template>
         <template v-else>
           <RouterLink to="/login">Login</RouterLink>
           <RouterLink to="/register">Register</RouterLink>
         </template>
+      </div>
+      <div class="right-right">
+        <button v-if="auth.isAuthenticated" class="logout-btn" @click="logout">Logout</button>
         <span class="badge">Chapter 13 · Mobile</span>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main>
