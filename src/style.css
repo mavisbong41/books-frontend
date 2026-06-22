@@ -25,7 +25,6 @@ a:hover {
 /* ---------- Navbar ---------- */
 header {
   background: #0f4c75;
-  color: #fff;
   padding: 14px 24px;
 }
 
@@ -33,42 +32,124 @@ header nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-header nav a {
-  color: #fff;
-  font-weight: 600;
-  font-size: 15px;
-  margin-right: 18px;
-}
-
-header nav a.router-link-exact-active {
-  text-decoration: underline;
+  width: 100%;
 }
 
 header .brand {
-  font-size: 19px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
   display: flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
+}
+
+header .logo-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: #f5a623;
+  color: #4a2d00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+header .brand:hover {
+  text-decoration: none;
+  opacity: 0.9;
 }
 
 header .right {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 20px;
+}
+
+header nav a {
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+header .user-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+header .avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #b5d4f4;
+  color: #042c53;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+header .user-pill span.name {
+  color: #fff;
+  font-size: 13px;
+}
+
+header .role-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+header .role-tag.admin {
+  background: #f7c1c1;
+  color: #501313;
+}
+
+header .role-tag.member {
+  background: #9fe1cb;
+  color: #04342c;
+}
+
+header button.logout-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+header button.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  opacity: 1;
 }
 
 header .badge {
   background: #f5a623;
   color: #4a2d00;
-  font-weight: 700;
-  font-size: 13px;
-  padding: 6px 14px;
+  font-weight: 600;
+  font-size: 11px;
+  padding: 4px 10px;
   border-radius: 999px;
+  white-space: nowrap;
 }
 
 /* ---------- Layout ---------- */
@@ -277,4 +358,21 @@ button.danger {
 ul {
   list-style: none;
   padding: 0;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.profile-label {
+  font-size: 13px;
+  color: #5b6472;
+}
+
+.profile-value {
+  font-size: 14px;
+  font-weight: 600;
 }

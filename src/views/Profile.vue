@@ -13,16 +13,44 @@ onMounted(async () => {
     error.value = e.response?.data?.error || e.message;
   }
 });
+
+function initials(name) {
+  if (!name) return '?';
+  return name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase();
+}
 </script>
 
 <template>
-  <h2>My account</h2>
-  <p v-if="error" style="color:red">{{ error }}</p>
+  <div class="card" style="max-width: 420px; margin: 0 auto;">
+    <div v-if="error" class="alert error">{{ error }}</div>
 
-  <div v-if="me">
-    <p><strong>ID:</strong> {{ me.id }}</p>
-    <p><strong>Name:</strong> {{ me.name }}</p>
-    <p><strong>Email:</strong> {{ me.email }}</p>
-    <p><strong>Role:</strong> {{ me.role }}</p>
+    <div v-if="me" style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+      <div class="avatar" style="width: 48px; height: 48px; font-size: 16px; background: #b5d4f4; color: #042c53;">
+        {{ initials(me.name) }}
+      </div>
+      <div>
+        <p style="font-weight: 600; font-size: 17px;">{{ me.name }}</p>
+        <span class="tag" :class="me.role">{{ me.role }}</span>
+      </div>
+    </div>
+
+    <div v-if="me" style="border-top: 1px solid #eef1f5;">
+      <div class="profile-row">
+        <span class="profile-label">User ID</span>
+        <span class="profile-value">{{ me.id }}</span>
+      </div>
+      <div class="profile-row">
+        <span class="profile-label">Name</span>
+        <span class="profile-value">{{ me.name }}</span>
+      </div>
+      <div class="profile-row">
+        <span class="profile-label">Email</span>
+        <span class="profile-value">{{ me.email }}</span>
+      </div>
+      <div class="profile-row" style="border-bottom: none;">
+        <span class="profile-label">Role</span>
+        <span class="profile-value">{{ me.role }}</span>
+      </div>
+    </div>
   </div>
 </template>

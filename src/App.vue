@@ -7,25 +7,36 @@ const auth = useAuth();
 function logout() {
   auth.logout();
 }
+
+function initials(name) {
+  if (!name) return '?';
+  return name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase();
+}
 </script>
 
 <template>
   <header>
     <nav>
       <RouterLink to="/" class="brand">
-        <span>📚</span> Books API
+      <span class="logo-badge">📚</span>
+      UTM Books
       </RouterLink>
+
       <div class="right">
-        <RouterLink to="/">Books</RouterLink>
-        <span v-if="auth.isAuthenticated">
+        <template v-if="auth.isAuthenticated">
+          <div class="user-pill">
+            <span class="avatar">{{ initials(auth.user?.name) }}</span>
+            <span class="name">{{ auth.user?.name }}</span>
+            <span class="role-tag" :class="auth.user?.role">{{ auth.user?.role }}</span>
+          </div>
           <RouterLink to="/profile">Profile</RouterLink>
-          <button class="secondary" @click="logout" style="margin-left: 12px;">Logout</button>
-        </span>
-        <span v-else>
+          <button class="logout-btn" @click="logout">Logout</button>
+        </template>
+        <template v-else>
           <RouterLink to="/login">Login</RouterLink>
           <RouterLink to="/register">Register</RouterLink>
-        </span>
-        <span class="badge">Chapter 13 • Mobile</span>
+        </template>
+        <span class="badge">Chapter 13 · Mobile</span>
       </div>
     </nav>
   </header>
